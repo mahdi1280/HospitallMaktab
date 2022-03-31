@@ -23,4 +23,34 @@ public class User extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    public static Builder builder(){
+        return new Builder();
+    }
+
+    public static class Builder{
+
+        private String username;
+        private String password;
+        private Role role;
+
+        public Builder username(String username){
+            this.username = username;
+            return this;
+        }
+
+        public Builder password(String password){
+            this.password = password;
+            return this;
+        }
+
+        public Builder role(Role role){
+            this.role = role;
+            return this;
+        }
+
+        public User build(){
+            return new User(username,password,role);
+        }
+    }
+
 }

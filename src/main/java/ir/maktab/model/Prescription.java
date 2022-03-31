@@ -1,9 +1,6 @@
 package ir.maktab.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Entity;
@@ -18,10 +15,12 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @Table(schema = Schema.SCHEMA)
+@ToString
 public class Prescription extends BaseEntity{
 
     @CreationTimestamp
     private LocalDate localDate;
+    private String description;
     @ManyToOne(fetch = FetchType.LAZY)
     private Doctor doctor;
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,9 +1,6 @@
 package ir.maktab.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -16,6 +13,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(schema = Schema.SCHEMA)
+@ToString
 public class Doctor extends BaseEntity{
 
     private String name;

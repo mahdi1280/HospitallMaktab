@@ -1,9 +1,6 @@
 package ir.maktab.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -15,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(schema = Schema.SCHEMA)
+@ToString
 public class Reserve extends BaseEntity{
 
     @CreationTimestamp
