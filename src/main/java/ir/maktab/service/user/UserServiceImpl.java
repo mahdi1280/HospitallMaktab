@@ -3,6 +3,8 @@ package ir.maktab.service.user;
 import ir.maktab.model.User;
 import ir.maktab.repository.UserRepository;
 
+import java.util.List;
+
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -40,5 +42,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsernameAndPassword(String username, String password) {
         return userRepository.findByUsernameAndPassword(username, password);
+    }
+
+    @Override
+    public void showAll() {
+        List<User> users = userRepository.showAll();
+        for (User user : users) {
+            System.out.println(user);
+        }
     }
 }

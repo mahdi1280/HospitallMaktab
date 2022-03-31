@@ -14,4 +14,5 @@ public interface ReserveService {
 
     void showAll();
 
+    Reserve findByDoctroIdAndTime(long id2, String time);
 }

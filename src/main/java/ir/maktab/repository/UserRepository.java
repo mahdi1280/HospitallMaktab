@@ -4,6 +4,8 @@ import ir.maktab.model.User;
 import ir.maktab.session.MySession;
 import org.hibernate.Session;
 
+import java.util.List;
+
 public interface UserRepository {
 
     default void save(User user){
@@ -56,5 +58,13 @@ public interface UserRepository {
                 .getSingleResult();
         instance.getTransaction().commit();
         return user;
+    }
+
+    default List<User> showAll(){
+        Session instance = MySession.getInstance();
+        instance.beginTransaction();
+        List<User> users = instance.createQuery("from User").getResultList();
+        instance.getTransaction().commit();
+        return users;
     }
 }

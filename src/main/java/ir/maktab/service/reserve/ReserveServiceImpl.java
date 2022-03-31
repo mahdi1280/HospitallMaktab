@@ -36,4 +36,9 @@ public class ReserveServiceImpl implements ReserveService {
             System.out.println(reserve);
         }
     }
+
+    @Override
+    public Reserve findByDoctroIdAndTime(long id2, String time) {
+        return reserveRepository.findByDoctorIdAndTime(id2, time);
+    }
 }

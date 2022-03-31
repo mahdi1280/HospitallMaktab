@@ -15,7 +15,7 @@ public interface DoctorRepository {
         return doctors;
     }
 
-    default Doctor findById(int id) {
+    default Doctor findById(long id) {
         Session instance = MySession.getInstance();
         Doctor doctor = instance.get(Doctor.class, id);
         instance.close();

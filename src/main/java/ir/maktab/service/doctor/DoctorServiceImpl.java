@@ -29,7 +29,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Doctor findDoctorById(int id) {
+    public Doctor findDoctorById(long id) {
         return doctorRepository.findById(id);
     }
 

@@ -12,7 +12,7 @@ public interface DoctorService {
 
     void deleteDoctor(Doctor doctor);
 
-    Doctor findDoctorById(int id);
+    Doctor findDoctorById(long id);
 
     List<Doctor> findDoctorByName(String name);
 

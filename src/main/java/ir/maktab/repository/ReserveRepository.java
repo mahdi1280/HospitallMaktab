@@ -48,7 +48,7 @@ public interface ReserveRepository {
 
     default List<Reserve> findByUserId(Long userId){
         Session instance = MySession.getInstance();
-        List<Reserve> reserves = instance.createQuery("from Reserve where userId = :userId")
+        List<Reserve> reserves = instance.createQuery("from Reserve where user.id = :userId")
                 .setParameter("userId", userId)
                 .list();
         instance.close();
@@ -56,4 +56,13 @@ public interface ReserveRepository {
     }
 
 
+   default Reserve findByDoctorIdAndTime(long id2, String time){
+       Session instance = MySession.getInstance();
+       Reserve reserve = instance.createQuery("select r From Reserve r where r.doctor.id = :doctorId and r.time = :time", Reserve.class)
+               .setParameter("doctorId", id2)
+               .setParameter("time", time)
+               .uniqueResult();
+       instance.close();
+       return reserve;
+   }
 }

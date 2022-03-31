@@ -1,6 +1,8 @@
 package ir.maktab;
 
+import ir.maktab.model.Reserve;
 import ir.maktab.model.Role;
+import ir.maktab.model.Time;
 import ir.maktab.model.User;
 import ir.maktab.service.doctor.DoctorService;
 import ir.maktab.service.doctor.DoctorServiceImpl;
@@ -11,6 +13,9 @@ import ir.maktab.service.reserve.ReserveServiceImpl;
 import ir.maktab.service.user.UserService;
 import ir.maktab.service.user.UserServiceImpl;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -85,11 +90,79 @@ public class Main {
                 scanner.nextLine();
                 switch (choice) {
                     case 1:
-
+                        reserveService.showAll();
+                        break;
+                    case 2:
+                        prescriptionService.findAll();
+                        break;
+                    case 3:
+                        doctorService.showAllDoctors();
+                        break;
+                    case 4:
+                        userService.showAll();
+                        break;
+                    case 5:
+                        userService.showAll();
+                        System.out.println("Enter your id: ");
+                        long id = scanner.nextInt();
+                        scanner.nextLine();
+                        reserveService.findByUserId(id);
+                        break;
+                    case 6:
+                        userService.showAll();
+                        System.out.println("Enter your id: ");
+                        long id1 = scanner.nextInt();
+                        scanner.nextLine();
+                        prescriptionService.findByUserId(id1);
+                        break;
+                    default:
+                        System.out.println("Invalid choice");
+                        break;
                 }
             }
         } else {
+            showMenuUser();
+            while (isExit) {
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+                switch (choice) {
+                    case 1:
+                        User byId = userService.findById(user.getId());
+                        System.out.println(byId);
+                        break;
+                        case 2:
+                            List<Reserve> byUserId = reserveService.findByUserId(user.getId());
+                            for ( Reserve reserve: byUserId) {
+                                System.out.println(reserve);
+                            }
+                            break;
+                    case 3:
+                        prescriptionService.findByUserId(user.getId());
+                        break;
+                    case 4:
+                        doctorService.showAllDoctors();
+                        break;
+                    case 5:
+                        doctorService.showAllDoctors();
+                        System.out.println("Enter your id: ");
+                        long id2 = scanner.nextInt();
+                        scanner.nextLine();
+                        doctorService.findDoctorById(id2);
+                        Arrays.stream(Time.values()).forEach(System.out::println);
+                        System.out.println("Enter your time: ");
+                        String time = scanner.nextLine();
+                        Reserve byDoctroIdAndTime = reserveService.findByDoctroIdAndTime(id2, time);
+                        if(byDoctroIdAndTime != null) {
+                            System.out.println("time is full");
+                            break;
+                        }
+                        reserveService.add(new Reserve(LocalDate.now(),Time.valueOf(time),user, doctorService.findDoctorById(id2)));
+                        System.out.println("Reserve Success");
+                        break;
 
+
+                }
+            }
         }
     }
 
@@ -114,9 +187,6 @@ public class Main {
         System.out.println("4. Show all users");
         System.out.println("5. show all Reservation of user");
         System.out.println("6. show all Presentation of user");
-        System.out.println("7. show all Doctor of user");
-        System.out.println("8. Show all Reservation of doctor");
-        System.out.println("9. Show all Presentation of doctor");
     }
 
     public static void showMenuUser() {
@@ -124,7 +194,6 @@ public class Main {
         System.out.println("2. show my reservation");
         System.out.println("3. show my presentation");
         System.out.println("4. show my doctor");
-        System.out.println("5 show all doctor");
-        System.out.println("6. reserve");
+        System.out.println("5. reserve");
     }
 }

@@ -16,4 +16,6 @@ public interface UserService {
 
     User findByUsernameAndPassword(String username, String password);
 
+    void showAll();
+
 }
