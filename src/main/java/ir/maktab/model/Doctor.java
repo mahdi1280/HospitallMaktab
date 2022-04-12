@@ -3,6 +3,7 @@ package ir.maktab.model;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.Collection;
@@ -13,10 +14,17 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(schema = Schema.SCHEMA)
-@ToString
 public class Doctor extends BaseEntity{
 
     private String name;
-    @ManyToMany(mappedBy = "doctors")
+    @ManyToMany(mappedBy = "doctors",fetch = FetchType.LAZY)
     private Collection<Clinic> clinics;
+
+    @Override
+    public String toString() {
+        return "Doctor{id: " +super.getId()+" "+
+                "name='" + name + '\'' +
+                ", clinics=" + clinics +
+                '}';
+    }
 }

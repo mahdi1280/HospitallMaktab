@@ -12,6 +12,7 @@ import ir.maktab.service.reserve.ReserveService;
 import ir.maktab.service.reserve.ReserveServiceImpl;
 import ir.maktab.service.user.UserService;
 import ir.maktab.service.user.UserServiceImpl;
+import ir.maktab.session.MySession;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -28,6 +29,7 @@ public class Main {
     private static User user;
 
     public static void main(String[] args) {
+        MySession.getInstance();
         showMenu();
         boolean isExit = true;
         while (isExit) {
@@ -53,7 +55,7 @@ public class Main {
                     String username1 = scanner.nextLine();
                     System.out.println("Enter your password: ");
                     String password1 = scanner.nextLine();
-                    User user = createUser(username1, password1, Role.USER);
+                    user = createUser(username1, password1, Role.USER);
                     userService.save(user);
                     if (user != null) {
                         System.out.println("Register Successful");
@@ -67,9 +69,9 @@ public class Main {
                     String username2 = scanner.nextLine();
                     System.out.println("Enter your password: ");
                     String password2 = scanner.nextLine();
-                    User user1 = createUser(username2, password2, Role.ADMIN);
-                    userService.save(user1);
-                    if (user1 != null) {
+                    user = createUser(username2, password2, Role.ADMIN);
+                    userService.save(user);
+                    if (user != null) {
                         System.out.println("Register Successful");
                         isExit = false;
                         break;
@@ -130,12 +132,12 @@ public class Main {
                         User byId = userService.findById(user.getId());
                         System.out.println(byId);
                         break;
-                        case 2:
-                            List<Reserve> byUserId = reserveService.findByUserId(user.getId());
-                            for ( Reserve reserve: byUserId) {
-                                System.out.println(reserve);
-                            }
-                            break;
+                    case 2:
+                        List<Reserve> byUserId = reserveService.findByUserId(user.getId());
+                        for (Reserve reserve : byUserId) {
+                            System.out.println(reserve);
+                        }
+                        break;
                     case 3:
                         prescriptionService.findByUserId(user.getId());
                         break;
@@ -150,18 +152,29 @@ public class Main {
                         doctorService.findDoctorById(id2);
                         Arrays.stream(Time.values()).forEach(System.out::println);
                         System.out.println("Enter your time: ");
-                        String time = scanner.nextLine();
+                        Time time = getTime();
                         Reserve byDoctroIdAndTime = reserveService.findByDoctroIdAndTime(id2, time);
-                        if(byDoctroIdAndTime != null) {
+                        if (byDoctroIdAndTime != null) {
                             System.out.println("time is full");
                             break;
                         }
-                        reserveService.add(new Reserve(LocalDate.now(),Time.valueOf(time),user, doctorService.findDoctorById(id2)));
+                        reserveService.add(new Reserve(LocalDate.now(), time, user, doctorService.findDoctorById(id2)));
                         System.out.println("Reserve Success");
                         break;
 
 
                 }
+            }
+        }
+    }
+
+    private static Time getTime() {
+        while (true) {
+            try {
+                String s = scanner.nextLine();
+                return Time.valueOf(s);
+            } catch (Exception e) {
+                System.out.println("not valid time. try again");
             }
         }
     }

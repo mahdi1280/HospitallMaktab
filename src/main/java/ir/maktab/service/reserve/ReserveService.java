@@ -1,6 +1,7 @@
 package ir.maktab.service.reserve;
 
 import ir.maktab.model.Reserve;
+import ir.maktab.model.Time;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface ReserveService {
 
     void showAll();
 
-    Reserve findByDoctroIdAndTime(long id2, String time);
+    Reserve findByDoctroIdAndTime(long id2, Time time);
 }

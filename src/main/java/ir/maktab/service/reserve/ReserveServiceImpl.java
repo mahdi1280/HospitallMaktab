@@ -1,6 +1,7 @@
 package ir.maktab.service.reserve;
 
 import ir.maktab.model.Reserve;
+import ir.maktab.model.Time;
 import ir.maktab.repository.ReserveRepository;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class ReserveServiceImpl implements ReserveService {
     }
 
     @Override
-    public Reserve findByDoctroIdAndTime(long id2, String time) {
+    public Reserve findByDoctroIdAndTime(long id2, Time time) {
         return reserveRepository.findByDoctorIdAndTime(id2, time);
     }
 }

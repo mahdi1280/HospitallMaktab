@@ -1,9 +1,6 @@
 package ir.maktab.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,6 +13,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = Schema.USER_TABLE_NAME,schema = Schema.SCHEMA)
+@ToString
 public class User extends BaseEntity{
 
     private String username;

@@ -51,13 +51,13 @@ public interface UserRepository {
 
     default User findByUsernameAndPassword(String username, String password){
         Session instance = MySession.getInstance();
-        instance.beginTransaction();
-        User user = (User) instance.createQuery("from User where username = :username and password = :password")
+        List<User> resultList = instance.createQuery("select u from User u where u.username=:username and u.password=:password", User.class)
                 .setParameter("username", username)
                 .setParameter("password", password)
-                .getSingleResult();
-        instance.getTransaction().commit();
-        return user;
+                .getResultList();
+        if(resultList.size() == 0)
+            return null;
+        return resultList.get(0);
     }
 
     default List<User> showAll(){

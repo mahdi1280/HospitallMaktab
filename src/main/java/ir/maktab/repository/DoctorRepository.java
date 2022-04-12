@@ -10,9 +10,7 @@ public interface DoctorRepository {
 
     default List<Doctor> findAll() {
         Session instance = MySession.getInstance();
-        List<Doctor> doctors = instance.createQuery("from Doctor").list();
-        instance.close();
-        return doctors;
+        return instance.createQuery("select d from Doctor d",Doctor.class).list();
     }
 
     default Doctor findById(long id) {

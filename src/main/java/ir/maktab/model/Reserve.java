@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(schema = Schema.SCHEMA)
-@ToString
 public class Reserve extends BaseEntity{
 
     @CreationTimestamp
@@ -25,4 +24,13 @@ public class Reserve extends BaseEntity{
     private Doctor doctor;
 
 
+    @Override
+    public String toString() {
+        return "Reserve{" +
+                "createdAt=" + createdAt +
+                ", time=" + time +
+                ", user=" + user +
+                ", doctor=" + doctor +
+                '}';
+    }
 }
