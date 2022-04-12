@@ -11,9 +11,8 @@ public interface ReserveRepository {
 
     default List<Reserve> findAll() {
         Session instance = MySession.getInstance();
-        List<Reserve> reserves = instance.createQuery("from Reserve").list();
-        instance.close();
-        return reserves;
+        return instance.createQuery("select r from Reserve r",Reserve.class)
+                .getResultList();
     }
 
     default Reserve findById(Long id) {

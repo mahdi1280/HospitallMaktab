@@ -13,7 +13,6 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = Schema.USER_TABLE_NAME,schema = Schema.SCHEMA)
-@ToString
 public class User extends BaseEntity{
 
     private String username;
@@ -23,6 +22,15 @@ public class User extends BaseEntity{
 
     public static Builder builder(){
         return new Builder();
+    }
+
+    @Override
+    public String toString() {
+        return "User{id: " +super.getId()+
+                " , username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                '}';
     }
 
     public static class Builder{

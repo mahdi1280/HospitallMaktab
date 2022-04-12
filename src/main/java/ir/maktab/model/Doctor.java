@@ -22,7 +22,7 @@ public class Doctor extends BaseEntity{
 
     @Override
     public String toString() {
-        return "Doctor{id: " +super.getId()+" "+
+        return "Doctor{" +
                 "name='" + name + '\'' +
                 ", clinics=" + clinics +
                 '}';

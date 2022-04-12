@@ -108,7 +108,10 @@ public class Main {
                         System.out.println("Enter your id: ");
                         long id = scanner.nextInt();
                         scanner.nextLine();
-                        reserveService.findByUserId(id);
+                        List<Reserve> byUserId = reserveService.findByUserId(id);
+                        for (Reserve reserve : byUserId) {
+                            System.out.println(reserve);
+                        }
                         break;
                     case 6:
                         userService.showAll();
