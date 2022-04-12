@@ -16,4 +16,6 @@ public interface ReserveService {
     void showAll();
 
     Reserve findByDoctroIdAndTime(long id2, Time time);
+
+    void findAll();
 }

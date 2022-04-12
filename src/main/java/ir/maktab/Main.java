@@ -1,9 +1,6 @@
 package ir.maktab;
 
-import ir.maktab.model.Reserve;
-import ir.maktab.model.Role;
-import ir.maktab.model.Time;
-import ir.maktab.model.User;
+import ir.maktab.model.*;
 import ir.maktab.service.doctor.DoctorService;
 import ir.maktab.service.doctor.DoctorServiceImpl;
 import ir.maktab.service.prescription.PrescriptionService;
@@ -120,6 +117,20 @@ public class Main {
                         scanner.nextLine();
                         prescriptionService.findByUserId(id1);
                         break;
+                    case 7:
+                        reserveService.findAll();
+                        System.out.println("Enter Your Description: ");
+                        String description = scanner.nextLine();
+                        System.out.println("Enter your Id: ");
+                        long reserve = scanner.nextLong();
+                        Reserve byId = reserveService.findById(reserve);
+                        if (byId == null) {
+                            System.out.println("Reserve not found");
+                            break;
+                        }
+                        prescriptionService.save(createPrescription(description, byId));
+                        System.out.println("save successful");
+                        break;
                     default:
                         System.out.println("Invalid choice");
                         break;
@@ -171,6 +182,13 @@ public class Main {
         }
     }
 
+    private static Prescription createPrescription(String description, Reserve reserve) {
+        return Prescription.builder()
+                .description(description)
+                .reserve(reserve)
+                .build();
+    }
+
     private static Time getTime() {
         while (true) {
             try {
@@ -203,6 +221,7 @@ public class Main {
         System.out.println("4. Show all users");
         System.out.println("5. show all Reservation of user");
         System.out.println("6. show all Presentation of user");
+        System.out.println("7. save prescription");
     }
 
     public static void showMenuUser() {

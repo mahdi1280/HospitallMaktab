@@ -42,4 +42,12 @@ public class ReserveServiceImpl implements ReserveService {
     public Reserve findByDoctroIdAndTime(long id2, Time time) {
         return reserveRepository.findByDoctorIdAndTime(id2, time);
     }
+
+    @Override
+    public void findAll() {
+        List<Reserve> all = reserveRepository.findAll();
+        for (Reserve reserve: all) {
+            System.out.println(reserve);
+        }
+    }
 }

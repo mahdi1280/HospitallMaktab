@@ -26,8 +26,8 @@ public class Reserve extends BaseEntity{
 
     @Override
     public String toString() {
-        return "Reserve{" +
-                "createdAt=" + createdAt +
+        return "Reserve{id= " +super.getId()+
+                " , createdAt=" + createdAt +
                 ", time=" + time +
                 ", user=" + user +
                 ", doctor=" + doctor +

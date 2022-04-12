@@ -45,7 +45,7 @@ public interface PrescriptionRepository {
 
     default List<Prescription> findByUserId(Long id) {
         Session instance = MySession.getInstance();
-        return instance.createQuery("select p from Prescription p  where p.user.id=:userId",Prescription.class)
+        return instance.createQuery("select p from Prescription p  where p.reserve.user.id=:userId",Prescription.class)
                 .setParameter("userId", id)
                 .getResultList();
     }
