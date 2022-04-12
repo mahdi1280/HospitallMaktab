@@ -23,6 +23,10 @@ public class Clinic extends BaseEntity {
             , inverseJoinColumns = @JoinColumn(name = "doctor_id"))
     private Collection<Doctor> doctors;
 
+    public Clinic(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "Clinic{" +
